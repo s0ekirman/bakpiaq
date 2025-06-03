@@ -4,7 +4,8 @@
  $username = 'root';
  $password = '';
 
- $database = 'bakpiaq';
+//sesuaikan dengan mysqlnya 
+ $database = 'nama db';
 
 //  koneksi database
 
