@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "194724746659",
+    "project_id": "bakpiaq-ce0d0",
+    "storage_bucket": "bakpiaq-ce0d0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194724746659:android:bdd3ea89f7f1a8fa103616",
+        "android_client_info": {
+          "package_name": "bakpiaq.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_7G4061c2RuhP0uTZSpjmpJyyQczkGDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

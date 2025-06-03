@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--pendak ganti wifi/lan ip ne kudu digenti-->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">192.168.216.153</domain>
+    </domain-config>
+</network-security-config>

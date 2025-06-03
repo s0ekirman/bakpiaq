@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "194724746659",
+    "firebase_url": "https://bakpiaq-ce0d0-default-rtdb.firebaseio.com",
+    "project_id": "bakpiaq-ce0d0",
+    "storage_bucket": "bakpiaq-ce0d0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194724746659:android:bdd3ea89f7f1a8fa103616",
+        "android_client_info": {
+          "package_name": "bakpiaq.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194724746659-u11n9o7vakmmjf1hgipspi8uhe9hl4l6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bakpiaq.com",
+            "certificate_hash": "c0df888ebd13c90f9627662f3b7ef42c37d043e9"
+          }
+        },
+        {
+          "client_id": "194724746659-fbcd1d605fcn3rff3ovp1lb2m6c5tor0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_7G4061c2RuhP0uTZSpjmpJyyQczkGDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194724746659-fbcd1d605fcn3rff3ovp1lb2m6c5tor0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
