@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun</title>
+</head>
+<body>
+    <h2>Form Pendaftaran</h2>
+    <form action="daftar.php" method="POST">
+        <div>
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <br>
+        
+        <div>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <br>
+        
+        <div>
+            <label for="password">Password (minimal 8 karakter):</label><br>
+            <input type="password" id="password" name="password" minlength="8" required>
+        </div>
+        <br>
+        
+        <div>
+            <label for="jabatan">Jabatan (untuk testing):</label><br>
+            <select id="jabatan" name="jabatan" required>
+                <option value="">Pilih Jabatan</option>
+                <option value="1">Admin</option>
+                <option value="2">Karyawan</option>
+                <option value="3" selected>Pengguna</option>
+            </select>
+        </div>
+        <br>
+        
+        <button type="submit">Daftar</button>
+    </form>
+</body>
+</html>

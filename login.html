@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bakpia QQ</title>
+</head>
+<body>
+    <h2>Login Bakpia QQ</h2>
+    
+    <form id="loginForm" method="POST" action="login.php">
+        <div>
+            <label for="username">Username/Email:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <div>
+            <button type="submit">Login</button>
+        </div>
+        <div>
+            <button type="button" id="googleLoginBtn">Login dengan Google</button>
+        </div>
+    </form>
+    
+    <div id="message"></div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const messageDiv = document.getElementById('message');
+            
+            fetch('login.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    messageDiv.innerHTML = '<p style="color: green;">' + data.message + '</p>';
+                    messageDiv.innerHTML += '<p>Selamat datang, ' + data.data.username + '!</p>';
+                    messageDiv.innerHTML += '<p>Jabatan: ' + data.data.jabatan_nama + '</p>';
+                    
+                    // Untuk web, redirect ke halaman yang sesuai
+                    // Untuk mobile Android, gunakan data.data.redirect_url
+                    setTimeout(() => {
+                        switch(data.data.jabatan) {
+                            case 1:
+                                window.location.href = 'atmin/index.php';
+                                break;
+                            case 2:
+                                window.location.href = 'staff/index.php';
+                                break;
+                            case 3:
+                                window.location.href = 'user/index.php';
+                                break;
+                            default:
+                                window.location.href = 'user/index.php';
+                        }
+                    }, 2000);
+                } else {
+                    messageDiv.innerHTML = '<p style="color: red;">' + data.message + '</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                messageDiv.innerHTML = '<p style="color: red;">Terjadi kesalahan sistem</p>';
+            });
+        });
+
+        // Google Login Handler - Inline untuk menghindari konflik
+        document.getElementById('googleLoginBtn').addEventListener('click', async function(e) {
+            e.preventDefault();
+            console.log('Attempting Google login...');
+            
+            try {
+                // Import Firebase modules
+                const { initializeApp } = await import("https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js");
+                const { getAuth, signInWithPopup, GoogleAuthProvider } = await import("https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js");
+                
+                // Firebase config
+                const firebaseConfig = {
+                    apiKey: "AIzaSyBdXhyQX4ay_SAr4kccdhkFrBIyM-xPWn4",
+                    authDomain: "bakpiaq-ce0d0.firebaseapp.com",
+                    projectId: "bakpiaq-ce0d0",
+                    storageBucket: "bakpiaq-ce0d0.firebasestorage.app",
+                    messagingSenderId: "194724746659",
+                    appId: "1:194724746659:web:a8e6d4ca3c378523103616",
+                    measurementId: "G-W80GK7XWNG"
+                };
+                
+                // Initialize Firebase
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const provider = new GoogleAuthProvider();
+                
+                console.log('Firebase initialized, attempting sign in...');
+                
+                // Sign in with Google
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                
+                console.log('Google sign in successful:', user.email);
+                
+                // Prepare user data
+                const userData = {
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                    emailVerified: user.emailVerified
+                };
+                
+                // Send to PHP backend
+                const response = await fetch('login_gugel.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    const messageDiv = document.getElementById('message');
+                    messageDiv.innerHTML = '<p style="color: green;">' + data.message + '</p>';
+                    messageDiv.innerHTML += '<p>Selamat datang, ' + data.data.username + '!</p>';
+                    messageDiv.innerHTML += '<p>Jabatan: ' + data.data.jabatan_nama + '</p>';
+                    
+                    // Redirect based on role
+                    setTimeout(() => {
+                        switch(data.data.jabatan.toString()) {
+                            case '1':
+                                window.location.href = 'atmin/index.php';
+                                break;
+                            case '2':
+                                window.location.href = 'staff/index.php';
+                                break;
+                            case '3':
+                                window.location.href = 'user/index.php';
+                                break;
+                            default:
+                                window.location.href = 'user/index.php';
+                        }
+                    }, 2000);
+                } else {
+                    throw new Error(data.message);
+                }
+                
+            } catch (error) {
+                console.error('Google login error:', error);
+                const messageDiv = document.getElementById('message');
+                messageDiv.innerHTML = '<p style="color: red;">Login Google gagal: ' + error.message + '</p>';
+            }
+        });
+    </script>
+</body>
+</html>
